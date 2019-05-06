@@ -66,8 +66,11 @@ class Queue:
     return self.storage.add_to_tail(item) 
   
   def dequeue(self):
-    self.size -= 1
-    return self.storage.remove_head()
+    if self.size == 0:
+      return None
+    else:
+      self.size -= 1
+      return self.storage.remove_head()
 
   def len(self):
     return self.size
