@@ -4,6 +4,12 @@ class Node:
     self.value = value
     self.next_node = next_node
 
+  def get_value(self):
+    return self.value
+
+  def get_next(self):
+    return self.next_node
+
   def set_next(self, new_next):
     self.next_node = new_next
 
@@ -48,20 +54,26 @@ class LinkedList:
       current = current.get_next()
     return False
 
-ll = LinkedList()
-
 class Queue:
   def __init__(self):
     self.size = 0
     # what data structure should we
     # use to store queue elements?
-    self.storage = ll
+    self.storage = LinkedList()
 
   def enqueue(self, item):
-    pass
+    self.size += 1
+    return self.storage.add_to_tail(item) 
   
   def dequeue(self):
-    pass
+    self.size -= 1
+    return self.storage.remove_head()
 
   def len(self):
-    pass
+    return self.size
+
+q = Queue()
+q.enqueue(2)
+print(q.len())
+q.dequeue()
+print(q.len())
