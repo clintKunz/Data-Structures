@@ -43,11 +43,34 @@ class DoublyLinkedList:
   def __len__(self):
     return self.length
 
+  def __str__(self):
+    return f'length: {self.length}'
+
   def add_to_head(self, value):
-    pass
+    if self.head == None:
+      new_head = ListNode(value)
+      self.head = new_head
+      self.tail = new_head
+      self.length += 1
+
+    else:
+      self.head.insert_before(value)
+      self.head = self.head.prev
+      self.length += 1
 
   def remove_from_head(self):
-    pass
+    if self.head == None:
+      return None
+    
+    elif self.head == self.tail:
+      self.head = None
+      self.tail = None
+      self.length -= 1
+
+    else: 
+      self.head.delete()
+      self.head = self.head.next
+      self.length -= 1
 
   def add_to_tail(self, value):
     pass
@@ -66,3 +89,19 @@ class DoublyLinkedList:
     
   def get_max(self):
     pass
+
+
+x = ListNode(1, 0, 3)
+y = ListNode(2)
+
+xx = DoublyLinkedList(x)
+
+print(xx)
+
+xx.add_to_head(y)
+
+print(xx)
+
+xx.remove_from_head()
+
+print(xx)
