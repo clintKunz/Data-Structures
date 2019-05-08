@@ -63,9 +63,11 @@ class DoublyLinkedList:
       return None
     
     elif self.head == self.tail:
+      head = self.head
       self.head = None
       self.tail = None
       self.length -= 1
+      return head.value
 
     else: 
       self.head.delete()
@@ -83,44 +85,57 @@ class DoublyLinkedList:
       self.tail = self.tail.next
 
   def remove_from_tail(self):
-    if self.tail == None:
+    if self.head == None or self.tail == None:
       return None
-
-    elif self.tail == self.head: 
-      self.head == None
-      self.tail == None
-      self.length -= 1
-
-    else: 
-      self.tail.delete()
-      self.tail = self.tail.prev
-      self.tail -= 1
-
+    tail = self.tail
+    self.delete(self.tail)
+    return tail.value
 
   def move_to_front(self, node):
-    pass
+    if self.head == None and self.tail == None:
+      return None
+    elif self.head == self.tail:
+      return None
+    else: 
+      self.delete(node)
+      self.add_to_head(node.value)
 
   def move_to_end(self, node):
-    pass
+    if self.head == None and self.tail == None:
+      return None
+    elif self.head == self.tail:
+      return None
+    else:
+      self.delete(node)
+      self.add_to_tail(node.value)
+
 
   def delete(self, node):
-    pass
+    if self.head == None:
+      return None
+    self.length -= 1
+    temp_prev = node.prev
+    temp_next = node.next
+    node.prev = None
+    node.next = None
+    if temp_prev:
+      temp_prev.next = temp_next
+    if temp_next:
+      temp_next.prev = temp_prev
+    if node == self.head:
+      self.head = temp_next
+    if node == self.tail:
+      self.tail = temp_prev
     
   def get_max(self):
-    pass
+    if self.head == None and self.tail == None:
+      return None
+    max = 0
+    current = self.head
+    while current:
+      if current.value > max:
+        max = current.value
+      current = current.next
+    return max 
 
 
-x = ListNode(1, 0, 3)
-y = ListNode(2)
-
-xx = DoublyLinkedList(x)
-
-print(xx)
-
-xx.add_to_head(y)
-
-print(xx)
-
-xx.remove_from_head()
-
-print(xx)
